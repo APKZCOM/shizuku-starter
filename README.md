@@ -7,7 +7,8 @@ Start Shizuku via WebADB directly from your browser, no local ADB installation o
 
 ## Thanks
 
-* [ya-webadb](https://github.com/yume-chan/ya-webadb) ADB in your browser
+* [ya-webadb](https://github.com/yume-chan/ya-webadb)
+* [Shizuku](https://github.com/rikkaapps/shizuku)
 
 ## License
 GPL-3.0
