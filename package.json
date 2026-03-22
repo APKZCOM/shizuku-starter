@@ -1,0 +1,22 @@
+{
+  "name": "shizuku_starter",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@yume-chan/adb": "^2.1.0",
+    "@yume-chan/adb-credential-web": "^2.1.0",
+    "@yume-chan/adb-daemon-webusb": "^2.1.0",
+    "@yume-chan/stream-extra": "^2.1.0"
+  },
+  "devDependencies": {
+    "vite": "^7.3.1"
+  }
+}
