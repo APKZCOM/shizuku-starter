@@ -43,11 +43,11 @@ a {color: var(--primary);}
 <body>
     <main class="card" id="mainCard">
         <h1 id="title">Shizuku Starter</h1>
-        <div id="disclaimer">
+        <dialog id="disclaimer" open>
             <h2>Disclaimer:</h3>
             <p>By connecting your device, you authorize this webpage to interact with your device via the ADB protocol. Please ensure you understand the risks associated with this operation.</p>
             <p>This webpage will not modify your system settings or collect your private data; it is solely for helping you start Shizuku.</p>
-        </div>
+        </dialog>
         <div class="status-container">
             <span class="status-dot"></span><span id="statusText">Not connected</span>
         </div>
