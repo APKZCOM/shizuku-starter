@@ -6,8 +6,8 @@
 <title>Shizuku Starter | Shizuku 启动器</title>
 <style>
 :root { --primary: #35e149; --bg: #f8fafc; }
-body { font-family: system-ui, sans-serif; background: var(--bg); display: flex; justify-content: center; }
-.card { box-sizing: border-box; width: 100%; padding: 1.5rem; }
+body { font-family: system-ui, sans-serif; background: var(--bg); }
+.card { box-sizing: border-box; width: 100%; padding: 1.5rem; margin-inline: auto; }
 h1 { margin-top: 0; color: #1e293b; font-size: 1.25rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
 .controls { display: flex; flex-direction: column; gap: 0.5rem; margin: 1rem 0; }
 @media (min-width:481px) {
@@ -34,11 +34,14 @@ body.connected .status-dot { background: #35e149; }
 .connected #disclaimer {display: none;}
 #cleanBtn { position: absolute; right: 8px; top: 8px; padding: 8px; border-radius: 8px; width: 32px; height: 32px; background: rgba(255,255,255,.2); }
 code {outline: 1px dotted currentColor; padding-inline: 4px;}
+a {color: var(--primary);}
+
+#ft {text-align: center; font-size: 12px; }
 </style>
   <script type="module" crossorigin src="/shizuku-starter/assets/index-B07E3apw.js"></script>
 </head>
 <body>
-    <div class="card" id="mainCard">
+    <main class="card" id="mainCard">
         <h1 id="title">Shizuku Starter</h1>
         <div id="disclaimer">
             <h2>Disclaimer:</h3>
@@ -54,7 +57,10 @@ code {outline: 1px dotted currentColor; padding-inline: 4px;}
             <button id="tcpipBtn">TCPIP (5555)</button>
         </div>
         <div id="terminal"></div>
-    </div>
+    </main>
 
+    <footer id="ft">
+         <a target="_blank" href="https://github.com/APKZCOM/shizuku-starter">Source Code</a>
+    </footer>
 </body>
 </html>
