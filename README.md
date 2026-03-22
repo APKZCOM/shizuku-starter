@@ -4,6 +4,9 @@ Start Shizuku via WebADB directly from your browser, no local ADB installation o
 
 无需安装 ADB，浏览器一键激活 Shizuku
 
+## Online Demo | 在线体验
+[shizuku-starter.apkz.app](https://shizuku-starter.apkz.app)
+
 
 ## Thanks
 
