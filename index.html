@@ -19,14 +19,17 @@ h1 { margin-top: 0; color: #1e293b; font-size: 1.25rem; border-bottom: 2px solid
 }
 button { background: var(--primary); color: white; text-shadow: 1px 1px 8px #888; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; cursor: pointer; font-weight: 600; flex: 1; }
 button[disabled],
+body:has(#disclaimer[open]) #connectBtn,
 body:not(.connected) #startBtn,
 body:not(.connected) #tcpipBtn,
 body.connected #connectBtn { opacity: 0.5; cursor: not-allowed; pointer-events: none; filter: grayscale(1); }
 .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #94a3b8; margin-right: 0.5rem; }
 body.connected .status-dot { background: #35e149; }
 #terminal { position:relative; background: #2f374a; color: #aaa; padding: 1rem; border-radius: 8px; height: 300px; overflow-y: auto; font-family: ui-monospace, monospace; font-size: 0.75rem; white-space: pre-wrap; margin-top: 1rem; transition: all .4s ease; }
-#terminal:empty { background-color: var(--bg); opacity: 0; height: 0px; }
-#disclaimer { position: relative; margin-block: 1rem; padding: 1px 1rem; border-radius: 8px; color: #fc0; background: #ffc; transition: all .3s ease; }
+#terminal:empty { opacity: 0.5;}
+#disclaimer { position: fixed; z-index: 999; top: 50%; transform: translateY(-50%); width: 85%; max-width: 400px; margin-block: 1rem; padding: 1px 1rem; border-radius: 8px; color: #fc0; background: rgba(255,255,222,.9); outline: none; transition: all .3s ease; }
+dialog::backdrop { background: rgba(0,0,0,.4); }
+dialog .x { position: absolute; top: 2px; right: 2px; width: 40px; height: 40px; padding: 0; background: rgba(255,255,255,.2); outline: none; }
 .error { color: red; }
 .warn { color: orange; }
 .succ { color: var(--primary); }
@@ -44,11 +47,6 @@ a {color: var(--primary);}
 <body>
     <main class="card" id="mainCard">
         <h1 id="title">Shizuku Starter</h1>
-        <dialog id="disclaimer" open>
-            <h2>Disclaimer:</h3>
-            <p>By connecting your device, you authorize this webpage to interact with your device via the ADB protocol. Please ensure you understand the risks associated with this operation.</p>
-            <p>This webpage will not modify your system settings or collect your private data; it is solely for helping you start Shizuku.</p>
-        </dialog>
         <div class="status-container">
             <span class="status-dot"></span><span id="statusText">Not connected</span>
         </div>
@@ -63,5 +61,13 @@ a {color: var(--primary);}
     <footer id="ft">
          <a target="_blank" href="https://github.com/APKZCOM/shizuku-starter">Source Code</a>
     </footer>
+
+    <dialog id="disclaimer">
+        <h2>⚠️  Disclaimer:</h2>
+        <p>By connecting your device, you authorize this webpage to interact with your device via the ADB protocol. Please ensure you understand the risks associated with this operation.</p>
+        <p>This webpage will not modify your system settings or collect your private data; it is solely for helping you start Shizuku.</p>
+        <button class="x" onclick="disclaimer.close();"> ✖️ </button>
+    </dialog>
+<script>disclaimer.showModal();</script>
 </body>
 </html>
