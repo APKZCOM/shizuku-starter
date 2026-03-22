@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: "/shizuku-starter/",
+  base: "/",
   build: {
     outDir: 'dist'
   },
