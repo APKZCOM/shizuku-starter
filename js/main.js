@@ -210,7 +210,7 @@ startBtn.onclick = async () => {
 }
 
 function openAPKZ() {
-    log(`APKZ app will open on ${deviceName}.`, 'warn');
+    log(i18n('msg_apkz_launching', {deviceName}), 'warn');
     
     let i = 3;
     let timer = setInterval(async function (){
@@ -221,8 +221,8 @@ function openAPKZ() {
         clearInterval(timer);
         
         try {
-	    cmd = `am start -S -p ${apkz_package_name} -a android.intent.action.VIEW -d "https://app.apkz.com/shizuku"`;
-            result = await executeCommand(cmd);
+	    let cmd = `am start -S -p ${apkz_package_name} -a android.intent.action.VIEW -d "https://app.apkz.com/shizuku"`;
+            let result = await executeCommand(cmd);
         
         } catch (err) {
             log(`Error: ${err.message}`, 'error');

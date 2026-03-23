@@ -119,6 +119,10 @@
         "en": "To connect, run <code>adb connect ${_target}</code>",
         "zh_cn": "现在可以通过命令来连接：<code>adb connect ${_target}</code>"
     },
+    "msg_apkz_launching": {
+        "en": "APKZ app will open on ${deviceName}.",
+        "zh_cn": "即将在目标设备 ${deviceName} 打开安大师。"
+    },
     "msg_": {
         "en": "",
         "zh_cn": ""
