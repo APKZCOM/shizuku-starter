@@ -6,10 +6,11 @@
 <title>Shizuku Starter</title>
 <meta name="description" content="Start Shizuku via WebADB directly from your browser, no local ADB installation or drivers required.">
 <script>
-if(navigator.language.indexOf('zh') === 0 && location.pathname.indexOf('/zh') === -1){
+if(navigator.language.indexOf('zh') === 0 && location.pathname === '/'){
     let url = './zh_cn.html';
     let [p1, p2] = location.href.split('?');
     if(p2) url += '?'+p2;
+    if(location.hash) url += '#'+location.hash;
     location.href = url;
 }
 </script>
