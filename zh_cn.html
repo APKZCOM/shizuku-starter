@@ -31,14 +31,14 @@ button { background: var(--primary); color: white; text-shadow: 1px 1px 8px #888
 button.dim { opacity: .8; filter: grayscale(1); }
 .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #94a3b8; margin-right: 0.5rem; }
 body.connected .status-dot { background: #35e149; }
-#terminal { position:relative; background: #2f374a; color: #aaa; padding: 1rem; border-radius: 8px; height: 300px; overflow-y: auto; font-family: ui-monospace, monospace; font-size: 0.75rem; white-space: pre-wrap; margin-top: 1rem; transition: all .4s ease; }
-#terminal:empty { opacity: 0.5;}
+#logs { position:relative; background: #2f374a; color: #aaa; padding: 1rem; border-radius: 8px; height: 300px; overflow-y: auto; font-family: ui-monospace, monospace; font-size: 0.75rem; white-space: pre-wrap; margin-top: 1rem; transition: all .4s ease; }
+#logs:empty { opacity: 0.5;}
 #disclaimer { background: rgba(255,255,222,.9); color: #fc0; }
 .error { color: red; }
 .warn { color: orange; }
 .succ { color: var(--primary); }
-#terminal .info {color: #aaa;}
-#terminal .time {color: gray!important;}
+#logs .info {color: #aaa;}
+#logs .time {color: gray!important;}
 .connected #disclaimer {display: none;}
 #cleanBtn { position: absolute; right: 8px; top: 8px; padding: 8px; border-radius: 8px; width: 32px; height: 32px; background: rgba(255,255,255,.2); }
 code {outline: 1px dotted currentColor; padding-inline: 4px;}
@@ -58,7 +58,7 @@ dialog .btn-cancel { background-color: #ccc; }
 .copyright { color: #999;}
 .sepa { color: #ccc; display: inline-block; margin-inline: .5rem; }
 </style>
-  <script type="module" crossorigin src="/assets/main-BV4slTAR.js"></script>
+  <script type="module" crossorigin src="/assets/main-3-owiE_H.js"></script>
 </head>
 <body>
     <main class="card" id="mainCard">
@@ -70,7 +70,7 @@ dialog .btn-cancel { background-color: #ccc; }
             <button id="startBtn">启动 Shizuku</button>
             <button id="tcpipBtn" class="dim">激活无线调试</button>
         </div>
-        <div id="terminal"></div>
+        <div id="logs"></div>
     </main>
 
     <footer id="ft">
