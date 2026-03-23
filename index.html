@@ -23,13 +23,12 @@ body:has(#disclaimer[open]) #connectBtn,
 body:not(.connected) #startBtn,
 body:not(.connected) #tcpipBtn,
 body.connected #connectBtn { opacity: 0.5; cursor: not-allowed; pointer-events: none; filter: grayscale(1); }
+button.dim { opacity: 0.8; filter: grayscale(.8); }
 .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #94a3b8; margin-right: 0.5rem; }
 body.connected .status-dot { background: #35e149; }
 #terminal { position:relative; background: #2f374a; color: #aaa; padding: 1rem; border-radius: 8px; height: 300px; overflow-y: auto; font-family: ui-monospace, monospace; font-size: 0.75rem; white-space: pre-wrap; margin-top: 1rem; transition: all .4s ease; }
 #terminal:empty { opacity: 0.5;}
-#disclaimer { position: fixed; z-index: 999; top: 50%; transform: translateY(-50%); width: 85%; max-width: 400px; margin-block: 1rem; padding: 1px 1rem; border-radius: 8px; color: #fc0; background: rgba(255,255,222,.9); outline: none; transition: all .3s ease; }
-dialog::backdrop { background: rgba(0,0,0,.4); }
-dialog .x { position: absolute; top: 2px; right: 2px; width: 40px; height: 40px; padding: 0; background: rgba(255,255,255,.2); outline: none; }
+#disclaimer { background: rgba(255,255,222,.9); color: #fc0; }
 .error { color: red; }
 .warn { color: orange; }
 .succ { color: var(--primary); }
@@ -40,9 +39,19 @@ dialog .x { position: absolute; top: 2px; right: 2px; width: 40px; height: 40px;
 code {outline: 1px dotted currentColor; padding-inline: 4px;}
 a {color: var(--primary);}
 
+dialog { position: fixed; z-index: 999; top: 30%; transform: translateY(-50%); width: 85%; max-width: 400px; padding: 0; border-radius: 8px; outline: none; transition: all .3s ease; }
+dialog::backdrop { background: rgba(0,0,0,.4); }
+dialog .x { position: absolute; top: 2px; right: 2px; width: 44px; height: 44px; font-size: 1.25rem; padding: 0; background: rgba(255,255,255,.1); color: #fc0; outline: none; }
+dialog .hd { margin: 0; padding: 0 3rem 0 1rem; height: 48px; line-height: 48px; border-bottom: 1px solid #fc0; }
+dialog .title { margin: 0; padding: 0; }
+dialog .bd { padding: 1rem; color: #333; }
+dialog .ft {padding: 1rem; display: flex; justify-content: flex-end; }
+dialog .ft button { max-width: 100px; margin-inline-start: 1rem; }
+dialog .btn-confirm { background-color: #fc0; }
+dialog .btn-cancel { background-color: #ccc; }
 #ft {margin: 2em auto; padding: 1em; text-align: center; font-size: 12px; }
 </style>
-  <script type="module" crossorigin src="/assets/index-B07E3apw.js"></script>
+  <script type="module" crossorigin src="/assets/index-DAtyfZGW.js"></script>
 </head>
 <body>
     <main class="card" id="mainCard">
@@ -51,7 +60,7 @@ a {color: var(--primary);}
             <span class="status-dot"></span><span id="statusText">Not connected</span>
         </div>
         <div class="controls">
-            <button id="connectBtn">Connect to device</button>
+            <button id="connectBtn" class="dim">Connect to device</button>
             <button id="startBtn">Start Shizuku</button>
             <button id="tcpipBtn">TCPIP (5555)</button>
         </div>
@@ -63,10 +72,16 @@ a {color: var(--primary);}
     </footer>
 
     <dialog id="disclaimer">
-        <h2>⚠️  Disclaimer:</h2>
-        <p>By connecting your device, you authorize this webpage to interact with your device via the ADB protocol. Please ensure you understand the risks associated with this operation.</p>
-        <p>This webpage will not modify your system settings or collect your private data; it is solely for helping you start Shizuku.</p>
-        <button class="x" onclick="disclaimer.close();"> ✖️ </button>
+        <button class="x" onclick="disclaimer.close();">✕</button>
+        <header class="hd"><h2 class="title">⚠️  Disclaimer:</h2></header>
+        <div class="bd">
+            <p>By connecting your device, you authorize this webpage to interact with your device via the ADB protocol. Please ensure you understand the risks associated with this operation.</p>
+            <p>This webpage will not modify your system settings or collect your private data; it is solely for helping you start Shizuku.</p>
+        </div>
+        <footer class="ft">
+            <button class="btn-cancel" onclick="disclaimer.close();">Disagree</button>
+            <button class="btn-confirm" onclick="disclaimer.close();connectBtn.classList.remove('dim');connectBtn.click();">Agree</button>
+        </footer>
     </dialog>
 <script>disclaimer.showModal();</script>
 </body>
