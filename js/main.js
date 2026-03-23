@@ -18,6 +18,10 @@ const log = (msg, clazz) => {
     terminal.scrollTop = terminal.scrollHeight;
 };
 
+const clearLogs = () => {
+    terminal.innerHTML = '';
+};
+
 async function executeCommand(command) {
     console.log(`command: ${command}`);
     if (!adb) {
@@ -92,6 +96,7 @@ async function connectDevice(_device) {
     } catch (err) {
         console.error(err);
         let msg = err.message || '';
+        if(msg.match(/(already in used)/i)) clearLogs();
         log(`Error: ${msg}`, "error");
 
         if(msg.indexOf('already in used') > -1){
@@ -110,10 +115,10 @@ async function adbReady() {
     console.log(device['#serial']);
     if(!serialno || serialno !== device.raw.serialNumber) return disconnected();
 
+    clearLogs();
     document.body.classList.add('connected');
     statusText.innerText = `Connected: ${deviceName}`;
     log(`Connected: ${deviceName} `, 'succ');
-    if(document.getElementById('disclaimer')) document.getElementById('disclaimer').remove();
 
     if(location.hash.indexOf('debug=1')>-1) window.adb = adb;
     if(location.hash.indexOf('btn=shizuku')>-1){
@@ -134,6 +139,10 @@ function disconnected() {
 }
 
 connectBtn.onclick = async () => {
+    if(connectBtn.classList.contains('dim')){
+        disclaimer.showModal();
+        return;
+    }
     await connectDevice(device);
 };
 
@@ -222,7 +231,7 @@ function openAPKZ() {
 tcpipBtn.onclick = async () => {
     try {
         let _device = deviceName;
-        let _ip = await executeCommand("ip addr show wlan0 | grep 'inet ' | cut -d' ' -f6 | cut -d/ -f1");
+        let _ip = (await executeCommand("ip addr show wlan0 | grep 'inet ' | cut -d' ' -f6 | cut -d/ -f1")).trim();
         let _target = _ip ? _ip+':5555' : '::';
         log(`Activating wireless debugging...`);
         setTimeout(function (){
