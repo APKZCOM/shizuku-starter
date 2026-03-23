@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width">
 <title>Shizuku 启动器</title>
 <meta name="description" content="无需安装 ADB，浏览器一键激活 Shizuku">
+<script>
+if(navigator.language.indexOf('zh') === 0 && location.pathname.indexOf('/zh') === -1){
+    let url = './zh_cn.html';
+    let [p1, p2] = location.href.split('?');
+    if(p2) url += '?'+p2;
+    location.href = url;
+}
+</script>
 <style>
 :root { --primary: #35e149; --bg: #f8fafc; }
 body { font-family: system-ui, sans-serif; background: var(--bg); }
