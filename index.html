@@ -28,12 +28,7 @@ h1 { margin-top: 0; color: #1e293b; font-size: 1.25rem; border-bottom: 2px solid
     }
 }
 button { background: var(--primary); color: white; text-shadow: 1px 1px 8px #888; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; cursor: pointer; font-weight: 600; flex: 1; }
-button[disabled],
-body:has(#disclaimer[open]) #connectBtn,
-body:not(.connected) #startBtn,
-body:not(.connected) #tcpipBtn,
-body.connected #connectBtn { opacity: 0.5; cursor: not-allowed; pointer-events: none; filter: grayscale(1); }
-button.dim { opacity: 0.8; }
+button.dim { opacity: .8; filter: grayscale(1); }
 .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #94a3b8; margin-right: 0.5rem; }
 body.connected .status-dot { background: #35e149; }
 #terminal { position:relative; background: #2f374a; color: #aaa; padding: 1rem; border-radius: 8px; height: 300px; overflow-y: auto; font-family: ui-monospace, monospace; font-size: 0.75rem; white-space: pre-wrap; margin-top: 1rem; transition: all .4s ease; }
@@ -71,9 +66,8 @@ dialog .btn-cancel { background-color: #ccc; }
             <span class="status-dot"></span><span id="statusText">{{msg_not_connected}}</span>
         </div>
         <div class="controls">
-            <button id="connectBtn" class="dim">{{btn_connect}}</button>
             <button id="startBtn">{{btn_start_shizuku}}</button>
-            <button id="tcpipBtn">{{btn_tcpip}}</button>
+            <button id="tcpipBtn" class="dim">{{btn_tcpip}}</button>
         </div>
         <div id="terminal"></div>
     </main>
@@ -85,14 +79,16 @@ dialog .btn-cancel { background-color: #ccc; }
     </footer>
 
     <dialog id="disclaimer">
-        <button class="x" onclick="disclaimer.close();">✕</button>
+        <button class="x" onclick="disclaimer.close('cancel');">✕</button>
         <header class="hd"><h2 class="title">⚠️  {{title_disclaimer}}:</h2></header>
         <div class="bd">
             {{msg_disclaimer}}
        </div>
         <footer class="ft">
-            <button class="btn-cancel" onclick="disclaimer.close();">{{btn_disagree}}</button>
-            <button class="btn-confirm" onclick="disclaimer.close();connectBtn.classList.remove('dim');connectBtn.click();">{{btn_agree}}</button>
+            <form method="dialog">
+                <button class="btn-cancel" type="reset" value="cancel" onclick="disclaimer.close('cancel');">{{btn_disagree}}</button>
+                <button class="btn-confirm" type="submit" value="confirm">{{btn_agree}}</button>
+            </form>
         </footer>
     </dialog>
 <script id="i18n-data"></script>

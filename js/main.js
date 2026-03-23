@@ -6,6 +6,7 @@ const shizuku_package_name = 'moe.shizuku.privileged.api';
 const shizuku_script  = 'libshizuku.so';
 const shizuku_download_url = 'https://app.apkz.com/app/'+shizuku_package_name+'/download';
 const apkz_package_name = 'io.xapk.installer';
+let AGREED = false;
 let device;
 let deviceName;
 let adb;
@@ -127,10 +128,10 @@ async function adbReady() {
     log(i18n('msg_connected', {deviceName}), 'succ');
 
     if(location.hash.indexOf('debug=1')>-1) window.adb = adb;
-    if(location.hash.indexOf('btn=shizuku')>-1){
-        startBtn.click();
-    }else if(location.hash.indexOf('btn=tcpip')>-1) {
+    if(location.hash.indexOf('btn=tcpip')>-1){
         tcpipBtn.click();
+    }else{
+        startBtn.click();
     }
 }
 
@@ -144,15 +145,15 @@ function disconnected() {
     statusText.innerText = i18n('msg_not_connected');
 }
 
-connectBtn.onclick = async () => {
-    if(connectBtn.classList.contains('dim')){
-        disclaimer.showModal();
-        return;
-    }
-    await connectDevice(device);
-};
-
 startBtn.onclick = async () => {
+    if(!document.body.classList.contains('connected')){
+        if(!AGREED) {
+            disclaimer.showModal();
+            return;
+        }
+        await connectDevice(device);
+    }
+
     let cmd, result;
     try {
 	cmd = `pm path ${shizuku_package_name}`;
@@ -232,6 +233,14 @@ function openAPKZ() {
 };
 
 tcpipBtn.onclick = async () => {
+    if(!document.body.classList.contains('connected')){
+        if(!AGREED) {
+            disclaimer.showModal();
+            return;
+        }
+        await connectDevice(device);
+    }
+
     try {
         let _device = deviceName;
         let _ip = (await executeCommand("ip addr show wlan0 | grep 'inet ' | cut -d' ' -f6 | cut -d/ -f1")).trim();
@@ -239,7 +248,7 @@ tcpipBtn.onclick = async () => {
         log(i18n('msg_wireless_debugging_activating'));
         setTimeout(function (){
             if(!device){
-                log(i18n('msg_wireless_debugging_activated'), 'succ');
+                log(i18n('msg_wireless_debugging_activated', {deviceName: _device}), 'succ');
                 log(i18n('msg_to_adb_connect', {_target}), 'warn');
             }
         },1000);
@@ -251,6 +260,14 @@ tcpipBtn.onclick = async () => {
         log(`Error: ${err.message || 'disconnected'}`, "error");
     }
 };
+
+disclaimer.onclose = async (evt) => {
+    // console.log(evt);
+    if(disclaimer.returnValue !== 'confirm') return;
+    AGREED = true;
+
+    await connectDevice();
+}
 
 if(navigator.usb){
     navigator.usb.addEventListener("connect", (event) => {
