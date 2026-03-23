@@ -56,7 +56,7 @@ dialog .btn-confirm { background-color: #fc0; }
 dialog .btn-cancel { background-color: #ccc; }
 #ft {margin: 2em auto; padding: 1em; text-align: center; font-size: 12px; }
 .copyright { color: #999;}
-.sepa { color: #ccc; display: inline-block; margin-inline: 1em; }
+.sepa { color: #ccc; display: inline-block; margin-inline: .5rem; }
 </style>
 </head>
 <body>
@@ -73,7 +73,9 @@ dialog .btn-cancel { background-color: #ccc; }
     </main>
 
     <footer id="ft">
-        <span class="copyright">&copy;APKZ.COM</span>
+        <a class="copyright" href="https://www.apkz.com">&copy;APKZ</a>
+        <span class="sepa"> | </span>
+        <a href="https://github.com/APKZCOM/shizuku-starter">{{source_code}}</a>
         <span class="sepa"> | </span>
         <a href="{{link_download_apkz}}">{{txt_download_apkz}}</a>
     </footer>

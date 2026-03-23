@@ -11,6 +11,8 @@ let device;
 let deviceName;
 let adb;
 
+let readyFor = location.hash.indexOf('btn=tcpip') > -1 ? 'tcpip' : 'shizuku';
+
 const i18n = (key, params) => {
     let msg = __I18N__[key] || `{{${key}}}`;
     if(!params) return msg;
@@ -128,7 +130,7 @@ async function adbReady() {
     log(i18n('msg_connected', {deviceName}), 'succ');
 
     if(location.hash.indexOf('debug=1')>-1) window.adb = adb;
-    if(location.hash.indexOf('btn=tcpip')>-1){
+    if(readyFor === 'tcpip'){
         tcpipBtn.click();
     }else{
         startBtn.click();
@@ -146,6 +148,7 @@ function disconnected() {
 }
 
 startBtn.onclick = async () => {
+    readyFor = 'shizuku';
     if(!document.body.classList.contains('connected')){
         if(!AGREED) {
             disclaimer.showModal();
@@ -154,6 +157,8 @@ startBtn.onclick = async () => {
         await connectDevice(device);
     }
 
+    if(!device || !adb) return disconnected();
+    
     let cmd, result;
     try {
 	cmd = `pm path ${shizuku_package_name}`;
@@ -233,6 +238,7 @@ function openAPKZ() {
 };
 
 tcpipBtn.onclick = async () => {
+    readyFor = 'tcpip';
     if(!document.body.classList.contains('connected')){
         if(!AGREED) {
             disclaimer.showModal();
@@ -240,6 +246,8 @@ tcpipBtn.onclick = async () => {
         }
         await connectDevice(device);
     }
+
+    if(!device || !adb) return disconnected();
 
     try {
         let _device = deviceName;
@@ -249,7 +257,7 @@ tcpipBtn.onclick = async () => {
         setTimeout(function (){
             if(!device){
                 log(i18n('msg_wireless_debugging_activated', {deviceName: _device}), 'succ');
-                log(i18n('msg_to_adb_connect', {_target}), 'warn');
+                // log(i18n('msg_to_adb_connect', {_target}), 'warn');
             }
         },1000);
         let result = await adb.tcpip.setPort(5555);;

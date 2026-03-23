@@ -15,6 +15,10 @@
         "en": "https://apkz.app",
         "zh_cn": "https://apkz.app"
     },
+    "source_code": {
+        "en": "Source Code",
+        "zh_cn": "源代码"
+    },
     "btn_connect": {
         "en": "Connect to device",
         "zh_cn": "连接设备"
@@ -24,8 +28,8 @@
         "zh_cn": "启动 Shizuku"
     },
     "btn_tcpip": {
-        "en": "TCPIP(5555)",
-        "zh_cn": "TCPIP(5555)"
+        "en": "Activate wireless debugging",
+        "zh_cn": "激活无线调试"
     },
     "btn_agree": {
         "en": "Agree",
@@ -112,8 +116,8 @@
         "zh_cn": "正在激活无线调试。。。"
     },
     "msg_wireless_debugging_activated": {
-        "en": "Wireless debugging on this target device ${deviceName} is activated.",
-        "zh_cn": "目标设备 ${deviceName} 已激活无线调试。"
+        "en": "Wireless debugging on this target device ${deviceName} is activated.<br>Now, you can start Shizuku via wireless debugging without pairing.",
+        "zh_cn": "目标设备 ${deviceName} 已激活无线调试。<br>现在可以跳过配对步骤直接通过无线调试启动 Shizuku 了。"
     },
     "msg_to_adb_connect": {
         "en": "To connect, run <code>adb connect ${_target}</code>",
