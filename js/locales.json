@@ -1,0 +1,127 @@
+{
+    "title": {
+        "en": "Shizuku Starter",
+        "zh_cn": "Shizuku 启动器"
+    },
+    "description": {
+        "en": "Start Shizuku via WebADB directly from your browser, no local ADB installation or drivers required.",
+        "zh_cn": "无需安装 ADB，浏览器一键激活 Shizuku"
+    },
+    "txt_download_apkz": {
+        "en": "Download APKZ App",
+        "zh_cn": "下载安大师"
+    },
+    "link_download_apkz": {
+        "en": "https://apkz.app",
+        "zh_cn": "https://apkz.app"
+    },
+    "btn_connect": {
+        "en": "Connect to device",
+        "zh_cn": "连接设备"
+    },
+    "btn_start_shizuku": {
+        "en": "Start Shizuku",
+        "zh_cn": "启动 Shizuku"
+    },
+    "btn_tcpip": {
+        "en": "TCPIP(5555)",
+        "zh_cn": "TCPIP(5555)"
+    },
+    "btn_agree": {
+        "en": "Agree",
+        "zh_cn": "同意"
+    },
+    "btn_disagree": {
+        "en": "Disagree",
+        "zh_cn": "不同意"
+    },
+    "title_disclaimer": {
+        "en": "Disclaimer",
+        "zh_cn": "免责声明"
+    },
+    "msg_disclaimer": {
+        "en": "<p>By connecting your device, you authorize this webpage to interact with your device via the ADB protocol. Please ensure you understand the risks associated with this operation.</p><p>This webpage will not modify your system settings or collect your private data; it is solely for helping you start Shizuku. <a href=\"https://github.com/APKZCOM/shizuku-starter\" target=\"_blank\">(Source Code)</a></p>",
+        "zh_cn": "<p>连接您的设备即表示您授权此网页通过 ADB 协议与您的设备进行交互。请务必了解此操作相关的风险。</p><p>此网页不会修改您的系统设置或收集您的个人数据；它仅用于帮助您启动 Shizuku。<a href=\"https://github.com/APKZCOM/shizuku-starter\" target=\"_blank\">(源代码)</a></p>"
+    },
+    "msg_browser_not_support_webusb": {
+        "en": "Your current browser does not support WebUSB. Please open this page in Chrome or Edge browser.",
+        "zh_cn": "当前浏览器不支持 WebUSB，建议使用 Chrome 或 Edge 浏览器打开本页面。"
+    },
+    "msg_not_connected": {
+        "en": "Not connected",
+        "zh_cn": "未连接"
+    },
+    "msg_connect_failed": {
+        "en": "Connection failed, please try again.",
+        "zh_cn": "连接失败，请重试。"
+    },
+    "msg_connected": {
+        "en": "Connected: ${deviceName}",
+        "zh_cn": "已连接：${deviceName}"
+    },
+    "msg_checkif_usb_cable": {
+        "en": "1. Please check if the USB cable is connected.",
+        "zh_cn": "1. 请检查USB线是否已连接。"
+    },
+    "msg_checkif_usb_debugging": {
+        "en": "2. Please check if developer options and USB debugging are enabled on the target device.",
+        "zh_cn": "2. 请检查目标设备上是否启用了开发者选项和 USB 调试。"
+    },
+    "msg_allow_debugging": {
+        "en": "Please tap \"OK\" on ${deviceName} to allow debugging.",
+        "zh_cn": "请在目标设备 ${deviceName}  点击 “确定” 以允许 USB 调试。"
+    },
+    "msg_adb_in_used": {
+        "en": "If other adb programs are already running, please execute <code>adb kill-server</code> to stop them first.",
+        "zh_cn": "如果有其他 ADB 程序正在连接，请先运行 <code>adb kill-server</code> 停止执行。"
+    },
+    "msg_close_android_studio": {
+        "en": "If Android Studio is open, please close it first.",
+        "zh_cn": "如果打开了 Android Studio，也请先关闭它。"
+    },
+    "msg_checkif_shizuku_installed": {
+        "en": "Checking if Shizuku is installed...",
+        "zh_cn": "正在检查是否已安装 Shizuku 。。。"
+    },
+    "msg_plz_install_shizuku": {
+        "en": "Please install Shizuku on ${deviceName} first.",
+        "zh_cn": "请先在 ${deviceName} 安装 Shizuku。"
+    },
+    "msg_plz_update_shizuku": {
+        "en": "Please update Shizuku to v13.6 or later.",
+        "zh_cn": "请将 Shizuku 更新至 v13.6  以上。"
+    },
+    "msg_no_shizuku_script": {
+        "en": "Oops! Startup script not found.",
+        "zh_cn": "未检测到 Shizuku 启动程序。"
+    },
+    "msg_shizuku_starting": {
+        "en": "Shizuku is starting up...",
+        "zh_cn": "Shizuku 启动中。。。"
+    },
+    "msg_shizuku_start_failed": {
+        "en": "Shizuku failed to start.",
+        "zh_cn": "Shizuku 启动失败！"
+    },
+    "msg_shizuku_start_succ": {
+        "en": "Shizuku started successfully. You can unplug the USB cable now.",
+        "zh_cn": "Shizuku 启动成功！现在可以拔掉 USB 线了。"
+    },
+    "msg_wireless_debugging_activating": {
+        "en": "Activating wireless debugging...",
+        "zh_cn": "正在激活无线调试。。。"
+    },
+    "msg_wireless_debugging_activated": {
+        "en": "Wireless debugging on this target device ${deviceName} is activated.",
+        "zh_cn": "目标设备 ${deviceName} 已激活无线调试。"
+    },
+    "msg_to_adb_connect": {
+        "en": "To connect, run <code>adb connect ${_target}</code>",
+        "zh_cn": "现在可以通过命令来连接：<code>adb connect ${_target}</code>"
+    },
+    "msg_": {
+        "en": "",
+        "zh_cn": ""
+    }
+    
+}

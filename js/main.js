@@ -10,6 +10,13 @@ let device;
 let deviceName;
 let adb;
 
+const i18n = (key, params) => {
+    let msg = __I18N__[key] || `{{${key}}}`;
+    if(!params) return msg;
+
+    return msg.replace(/\${([a-zA-Z0-9_]+)}/g, (match, key) => params[key] ?? match);
+};
+
 const log = (msg, clazz) => {
     if(!document.getElementById('cleanBtn')) {
         terminal.innerHTML += `<button id="cleanBtn" onclick="terminal.innerHTML='';">🗑️</button>`;
@@ -62,9 +69,9 @@ async function connectDevice(_device) {
 	console.log({device});
         
         if(!device || !device.raw) {
-            log("Connection failed, please try again.", "error");
-            log(`1. Please check if the USB is connected.`, 'warn');
-            log(`2. Please check if developer options and USB debugging are enabled on your phone.`, 'warn')
+            log(i18n('msg_connect_failed'), "error");
+            log(i18n('msg_checkif_usb_cable'), 'warn');
+            log(i18n('msg_checkif_usb_debugging'), 'warn')
             return;
         }
 
@@ -76,10 +83,9 @@ async function connectDevice(_device) {
 	const connection = await device.connect();
 	console.log({connection});
 
-        statusText.innerText = "Authenticating...";
         setTimeout(function (){
             if(document.body.classList.contains('connected')) return;
-            log(`Please tap "OK" on ${deviceName} to allow debugging.`, 'warn');
+            log(i18n('msg_allow_debugging', {deviceName}), 'warn');
         }, 1000);
 
 	const transport = await AdbDaemonTransport.authenticate({
@@ -100,8 +106,8 @@ async function connectDevice(_device) {
         log(`Error: ${msg}`, "error");
 
         if(msg.indexOf('already in used') > -1){
-            log(`If other adb programs are already running, please execute <code>adb kill-server</code> to stop them first.`, 'warn');
-            log(`If Android Studio is open, please close it first.`, 'warn');
+            log(i18n('msg_adb_in_used'), 'warn');
+            log(i18n('msg_close_android_studio'), 'warn');
         }
     }
 
@@ -117,8 +123,8 @@ async function adbReady() {
 
     clearLogs();
     document.body.classList.add('connected');
-    statusText.innerText = `Connected: ${deviceName}`;
-    log(`Connected: ${deviceName} `, 'succ');
+    statusText.innerText = i18n('msg_connected', {deviceName});
+    log(i18n('msg_connected', {deviceName}), 'succ');
 
     if(location.hash.indexOf('debug=1')>-1) window.adb = adb;
     if(location.hash.indexOf('btn=shizuku')>-1){
@@ -135,7 +141,7 @@ function disconnected() {
     adb = null;
     
     document.body.classList.remove('connected');
-    statusText.innerText = "Not connected";
+    statusText.innerText = i18n('msg_not_connected');
 }
 
 connectBtn.onclick = async () => {
@@ -150,10 +156,7 @@ startBtn.onclick = async () => {
     let cmd, result;
     try {
 	cmd = `pm path ${shizuku_package_name}`;
-        log(`Checking if Shizuku is installed...`);
-        //log('......');
-        //log(cmd);
-        //log('......');
+        log(i18n('msg_checkif_shizuku_installed'));
         result = await executeCommand(cmd);
 
     } catch (err) {
@@ -163,7 +166,7 @@ startBtn.onclick = async () => {
     let [, shizuku_path] = result.match(/package:(.+)\/base.apk/) || [];
     if(!shizuku_path){
         log(`Oops! ${result}`, 'error');
-        log(`Please install Shizuku on ${deviceName} first.`, 'warn');
+        log(i18n('msg_plz_install_shizuku', {deviceName}), 'warn');
 
 	cmd = `am start -a android.intent.action.VIEW -d "${shizuku_download_url}"`;
         await executeCommand(cmd);
@@ -175,8 +178,8 @@ startBtn.onclick = async () => {
         result = ((await executeCommand(cmd)) || '').trim();
         log(result);
         if(!result || result.indexOf(shizuku_path) !== 0 || result.substr(-shizuku_script.length) !== shizuku_script){
-            log(`Oops! Startup script not found`, 'error');
-            log(`Please update Shizuku first.`);
+            log(i18n('msg_no_shizuku_script'), 'error');
+            log(i18n('msg_plz_update_shizuku'));
 
 	    cmd = `am start -a android.intent.action.VIEW -d "${shizuku_download_url}"`;
             await executeCommand(cmd);
@@ -184,7 +187,7 @@ startBtn.onclick = async () => {
         }
 
         cmd = result;
-        log(`Starting Shizuku...`);
+        log(i18n('msg_shizuku_starting'));
         //log('......');
         //log(cmd);
         //log('......');
@@ -197,11 +200,11 @@ startBtn.onclick = async () => {
 
     if(!result.match(/shizuku_server pid is \d+/)){
         log(`Oops! ${result}`, 'error');
-        log("Shizuku failed to start.", 'error');
+        log(i18n('msg_shizuku_start_failed'), 'error');
         return;
     }
 	
-    log("Shizuku started successfully. You can unplug the USB cable now.", 'succ');
+    log(i18n('msg_shizuku_start_succ'), 'succ');
 
     if(location.hash.indexOf('APKZ') > -1) openAPKZ();
 }
@@ -233,11 +236,11 @@ tcpipBtn.onclick = async () => {
         let _device = deviceName;
         let _ip = (await executeCommand("ip addr show wlan0 | grep 'inet ' | cut -d' ' -f6 | cut -d/ -f1")).trim();
         let _target = _ip ? _ip+':5555' : '::';
-        log(`Activating wireless debugging...`);
+        log(i18n('msg_wireless_debugging_activating'));
         setTimeout(function (){
             if(!device){
-                log(`Your phone (${_device}) has wireless debugging enabled.`, 'succ');
-                log(`To connect, run <code>adb connect ${_target}</code>`, 'warn');
+                log(i18n('msg_wireless_debugging_activated'), 'succ');
+                log(i18n('msg_to_adb_connect', {_target}), 'warn');
             }
         },1000);
         let result = await adb.tcpip.setPort(5555);;
@@ -261,5 +264,5 @@ if(navigator.usb){
         disconnected();
     });
 }else{
-    log('Your current browser does not support WebUSB. Please open this page in Chrome or Edge browser.', 'error');
+    log(i18n('msg_browser_not_support_webusb'), 'error');
 }
