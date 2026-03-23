@@ -11,7 +11,7 @@ let device;
 let deviceName;
 let adb;
 
-let readyFor = location.hash.indexOf('btn=tcpip') > -1 ? 'tcpip' : 'shizuku';
+let readyFor = false;
 
 const i18n = (key, params) => {
     let msg = __I18N__[key] || `{{${key}}}`;
@@ -21,15 +21,12 @@ const i18n = (key, params) => {
 };
 
 const log = (msg, clazz) => {
-    if(!document.getElementById('cleanBtn')) {
-        terminal.innerHTML += `<button id="cleanBtn" onclick="terminal.innerHTML='';">🗑️</button>`;
-    }
-    terminal.innerHTML += `<div class="${clazz || 'info'}"><time class="time">[${new Date().toLocaleTimeString()}]</time> <span>${msg}</span></div>`;
-    terminal.scrollTop = terminal.scrollHeight;
+    logs.innerHTML += `<div class="${clazz || 'info'}"><time class="time">[${new Date().toLocaleTimeString()}]</time> <span>${msg}</span></div>`;
+    logs.scrollTop = logs.scrollHeight;
 };
 
 const clearLogs = () => {
-    terminal.innerHTML = '';
+    logs.innerHTML = '';
 };
 
 async function executeCommand(command) {
@@ -130,7 +127,8 @@ async function adbReady() {
     log(i18n('msg_connected', {deviceName}), 'succ');
 
     if(location.hash.indexOf('debug=1')>-1) window.adb = adb;
-    if(readyFor === 'tcpip'){
+    if(readyFor) return;
+    if(location.hash.indexOf('btn=tcpip') > -1){
         tcpipBtn.click();
     }else{
         startBtn.click();
