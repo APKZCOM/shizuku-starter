@@ -28,12 +28,7 @@ h1 { margin-top: 0; color: #1e293b; font-size: 1.25rem; border-bottom: 2px solid
     }
 }
 button { background: var(--primary); color: white; text-shadow: 1px 1px 8px #888; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; cursor: pointer; font-weight: 600; flex: 1; }
-button[disabled],
-body:has(#disclaimer[open]) #connectBtn,
-body:not(.connected) #startBtn,
-body:not(.connected) #tcpipBtn,
-body.connected #connectBtn { opacity: 0.5; cursor: not-allowed; pointer-events: none; filter: grayscale(1); }
-button.dim { opacity: 0.8; }
+button.dim { opacity: .8; filter: grayscale(1); }
 .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #94a3b8; margin-right: 0.5rem; }
 body.connected .status-dot { background: #35e149; }
 #terminal { position:relative; background: #2f374a; color: #aaa; padding: 1rem; border-radius: 8px; height: 300px; overflow-y: auto; font-family: ui-monospace, monospace; font-size: 0.75rem; white-space: pre-wrap; margin-top: 1rem; transition: all .4s ease; }
@@ -63,7 +58,7 @@ dialog .btn-cancel { background-color: #ccc; }
 .copyright { color: #999;}
 .sepa { color: #ccc; display: inline-block; margin-inline: 1em; }
 </style>
-  <script type="module" crossorigin src="/assets/main-CYe7vwhl.js"></script>
+  <script type="module" crossorigin src="/assets/main-oI71mPlf.js"></script>
 </head>
 <body>
     <main class="card" id="mainCard">
@@ -72,9 +67,8 @@ dialog .btn-cancel { background-color: #ccc; }
             <span class="status-dot"></span><span id="statusText">未连接</span>
         </div>
         <div class="controls">
-            <button id="connectBtn" class="dim">连接设备</button>
             <button id="startBtn">启动 Shizuku</button>
-            <button id="tcpipBtn">TCPIP(5555)</button>
+            <button id="tcpipBtn" class="dim">TCPIP(5555)</button>
         </div>
         <div id="terminal"></div>
     </main>
@@ -86,14 +80,16 @@ dialog .btn-cancel { background-color: #ccc; }
     </footer>
 
     <dialog id="disclaimer">
-        <button class="x" onclick="disclaimer.close();">✕</button>
+        <button class="x" onclick="disclaimer.close('cancel');">✕</button>
         <header class="hd"><h2 class="title">⚠️  免责声明:</h2></header>
         <div class="bd">
             <p>连接您的设备即表示您授权此网页通过 ADB 协议与您的设备进行交互。请务必了解此操作相关的风险。</p><p>此网页不会修改您的系统设置或收集您的个人数据；它仅用于帮助您启动 Shizuku。<a href="https://github.com/APKZCOM/shizuku-starter" target="_blank">(源代码)</a></p>
        </div>
         <footer class="ft">
-            <button class="btn-cancel" onclick="disclaimer.close();">不同意</button>
-            <button class="btn-confirm" onclick="disclaimer.close();connectBtn.classList.remove('dim');connectBtn.click();">同意</button>
+            <form method="dialog">
+                <button class="btn-cancel" type="reset" value="cancel" onclick="disclaimer.close('cancel');">不同意</button>
+                <button class="btn-confirm" type="submit" value="confirm">同意</button>
+            </form>
         </footer>
     </dialog>
 <script>window.__I18N__ = {"title":"Shizuku 启动器","description":"无需安装 ADB，浏览器一键激活 Shizuku","txt_download_apkz":"下载安大师","link_download_apkz":"https://apkz.app","btn_connect":"连接设备","btn_start_shizuku":"启动 Shizuku","btn_tcpip":"TCPIP(5555)","btn_agree":"同意","btn_disagree":"不同意","title_disclaimer":"免责声明","msg_disclaimer":"<p>连接您的设备即表示您授权此网页通过 ADB 协议与您的设备进行交互。请务必了解此操作相关的风险。</p><p>此网页不会修改您的系统设置或收集您的个人数据；它仅用于帮助您启动 Shizuku。<a href=\"https://github.com/APKZCOM/shizuku-starter\" target=\"_blank\">(源代码)</a></p>","msg_browser_not_support_webusb":"当前浏览器不支持 WebUSB，建议使用 Chrome 或 Edge 浏览器打开本页面。","msg_not_connected":"未连接","msg_connect_failed":"连接失败，请重试。","msg_connected":"已连接：${deviceName}","msg_checkif_usb_cable":"1. 请检查USB线是否已连接。","msg_checkif_usb_debugging":"2. 请检查目标设备上是否启用了开发者选项和 USB 调试。","msg_allow_debugging":"请在目标设备 ${deviceName}  点击 “确定” 以允许 USB 调试。","msg_adb_in_used":"如果有其他 ADB 程序正在连接，请先运行 <code>adb kill-server</code> 停止执行。","msg_close_android_studio":"如果打开了 Android Studio，也请先关闭它。","msg_checkif_shizuku_installed":"正在检查是否已安装 Shizuku 。。。","msg_plz_install_shizuku":"请先在 ${deviceName} 安装 Shizuku。","msg_plz_update_shizuku":"请将 Shizuku 更新至 v13.6  以上。","msg_no_shizuku_script":"未检测到 Shizuku 启动程序。","msg_shizuku_starting":"Shizuku 启动中。。。","msg_shizuku_start_failed":"Shizuku 启动失败！","msg_shizuku_start_succ":"Shizuku 启动成功！现在可以拔掉 USB 线了。","msg_wireless_debugging_activating":"正在激活无线调试。。。","msg_wireless_debugging_activated":"目标设备 ${deviceName} 已激活无线调试。","msg_to_adb_connect":"现在可以通过命令来连接：<code>adb connect ${_target}</code>","msg_apkz_launching":"即将在目标设备 ${deviceName} 打开安大师。","msg_":""};</script>
