@@ -27,7 +27,7 @@ export default defineConfig({
         // 判断当前处理的是 index.html(en) 还是 zh_cn.html(zh)
         let _path = (ctx.originalUrl || ctx.path).split('?')[0];
         let locale = basename(_path).replace('.html', '');
-        locale = locale == 'index' ? 'en' : locale;
+        locale = (!locale || locale == 'index') ? 'en' : locale;
         
         const data = {};
         Object.keys(locales).map(k => {
