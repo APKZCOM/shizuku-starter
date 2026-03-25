@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<title>Shizuku 启动器</title>
-<meta name="description" content="无需安装 ADB，浏览器一键激活 Shizuku">
+<title>Shizuku 启动器 - 无需安装 ADB，浏览器一键启动 Shizuku</title>
+<meta name="description" content="无需安装 ADB，浏览器一键启动 Shizuku">
 <script>
 if(navigator.language.indexOf('zh') === 0 && location.pathname === '/'){
     let url = './zh_cn.html';
@@ -33,27 +33,31 @@ button.dim { opacity: .8; filter: grayscale(1); }
 body.connected .status-dot { background: #35e149; }
 #logs { position:relative; background: #2f374a; color: #aaa; padding: 1rem; border-radius: 8px; height: 300px; overflow-y: auto; font-family: ui-monospace, monospace; font-size: 0.75rem; white-space: pre-wrap; margin-top: 1rem; transition: all .4s ease; }
 #logs:empty { opacity: 0.5;}
-#disclaimer { background: rgba(255,255,222,.9); color: #fc0; }
 .error { color: red; }
 .warn { color: orange; }
 .succ { color: var(--primary); }
+.hide { display: none; }
 #logs .info {color: #aaa;}
 #logs .time {color: gray!important;}
-.connected #disclaimer {display: none;}
 #cleanBtn { position: absolute; right: 8px; top: 8px; padding: 8px; border-radius: 8px; width: 32px; height: 32px; background: rgba(255,255,255,.2); }
 code {outline: 1px dotted currentColor; padding-inline: 4px;}
 a {color: var(--primary);}
 
-dialog { position: fixed; z-index: 999; top: 25%; transform: translateY(-50%); width: 85%; max-width: 400px; padding: 0; border-radius: 8px; outline: none; transition: all .3s ease; }
+dialog { position: fixed; z-index: 999; top: 25%; transform: translateY(-50%); width: 85%; max-width: 400px; padding: 0; border-radius: 8px; border: none; outline: none; box-shadow: 0 0 1em #666; transition: all .3s ease; }
 dialog::backdrop { background: rgba(0,0,0,.4); }
-dialog .x { position: absolute; top: 2px; right: 2px; width: 44px; height: 44px; font-size: 1.25rem; padding: 0; background: rgba(255,255,255,.1); color: #fc0; outline: none; }
-dialog .hd { margin: 0; padding: 0 3rem 0 1rem; height: 48px; line-height: 48px; border-bottom: 1px solid #fc0; }
+@starting-style {
+    dialog[open] { transform: translateY(-200%); opacity: 0; }
+}
+dialog .x { position: absolute; top: 2px; right: 2px; width: 44px; height: 44px; font-size: 1.2rem; padding: 0; background: rgba(255,255,255,.1); color: #bbb; outline: none; }
+dialog .hd { margin: 0; padding: 0 3rem 0 1rem; height: 48px; line-height: 48px; border-bottom: 1px solid #ddd; }
 dialog .title { margin: 0; padding: 0; }
-dialog .bd { padding: 1rem; color: #333; }
+dialog .bd { padding: 1rem; color: #333; font-size: 14px; }
 dialog .ft {padding: 1rem; display: flex; justify-content: flex-end; }
 dialog .ft button { max-width: 100px; margin-inline-start: 1rem; }
-dialog .btn-confirm { background-color: #fc0; }
+dialog .btn-confirm { background-color: var(--primary); }
 dialog .btn-cancel { background-color: #ccc; }
+dialog a,
+dialog button { outline: none; }
 #ft {margin: 2em auto; padding: 1em; text-align: center; font-size: 12px; }
 .copyright { color: #999;}
 .sepa { color: #ccc; display: inline-block; margin-inline: .5rem; }
@@ -81,11 +85,11 @@ dialog .btn-cancel { background-color: #ccc; }
         <a href="https://apkz.app">下载安大师</a>
     </footer>
 
-    <dialog id="disclaimer">
-        <button class="x" onclick="disclaimer.close('cancel');">✕</button>
+    <dialog id="disclaimer" tabindex="-1">
+        <!--button class="x" onclick="disclaimer.close('cancel');">✕</button-->
         <header class="hd"><h2 class="title">⚠️  免责声明:</h2></header>
         <div class="bd">
-            <p>连接您的设备即表示您授权此网页通过 ADB 协议与您的设备进行交互。请务必了解此操作相关的风险。</p><p>此网页不会修改您的系统设置或收集您的个人数据；它仅用于帮助您启动 Shizuku。<a href="https://github.com/APKZCOM/shizuku-starter" target="_blank">(源代码)</a></p>
+            <p>连接您的设备即表示您授权此网页通过 ADB 协议与您的设备进行交互。</p><p>此网页不会修改您的系统设置或收集您的个人数据，它仅用于帮助您启动 Shizuku。<a href="https://github.com/APKZCOM/shizuku-starter" target="_blank">(查看源代码)</a></p>
        </div>
         <footer class="ft">
             <form method="dialog">
@@ -94,7 +98,7 @@ dialog .btn-cancel { background-color: #ccc; }
             </form>
         </footer>
     </dialog>
-<script>window.__I18N__ = {"title":"Shizuku 启动器","description":"无需安装 ADB，浏览器一键激活 Shizuku","txt_download_apkz":"下载安大师","link_download_apkz":"https://apkz.app","source_code":"源代码","btn_connect":"连接设备","btn_start_shizuku":"启动 Shizuku","btn_tcpip":"激活无线调试","btn_agree":"同意","btn_disagree":"不同意","title_disclaimer":"免责声明","msg_disclaimer":"<p>连接您的设备即表示您授权此网页通过 ADB 协议与您的设备进行交互。请务必了解此操作相关的风险。</p><p>此网页不会修改您的系统设置或收集您的个人数据；它仅用于帮助您启动 Shizuku。<a href=\"https://github.com/APKZCOM/shizuku-starter\" target=\"_blank\">(源代码)</a></p>","msg_browser_not_support_webusb":"当前浏览器不支持 WebUSB，建议使用 Chrome 或 Edge 浏览器打开本页面。","msg_not_connected":"未连接","msg_connect_failed":"连接失败，请重试。","msg_connected":"已连接：${deviceName}","msg_checkif_usb_cable":"1. 请检查USB线是否已连接。","msg_checkif_usb_debugging":"2. 请检查目标设备上是否启用了开发者选项和 USB 调试。","msg_allow_debugging":"请在目标设备 ${deviceName}  点击 “确定” 以允许 USB 调试。","msg_adb_in_used":"如果有其他 ADB 程序正在连接，请先运行 <code>adb kill-server</code> 停止执行。","msg_close_android_studio":"如果打开了 Android Studio，也请先关闭它。","msg_checkif_shizuku_installed":"正在检查是否已安装 Shizuku 。。。","msg_plz_install_shizuku":"请先在 ${deviceName} 安装 Shizuku。","msg_plz_update_shizuku":"请将 Shizuku 更新至 v13.6  以上。","msg_no_shizuku_script":"未检测到 Shizuku 启动程序。","msg_shizuku_starting":"Shizuku 启动中。。。","msg_shizuku_start_failed":"Shizuku 启动失败！","msg_shizuku_start_succ":"Shizuku 启动成功！现在可以拔掉 USB 线了。","msg_wireless_debugging_activating":"正在激活无线调试。。。","msg_wireless_debugging_activated":"目标设备 ${deviceName} 已激活无线调试。<br>现在可以跳过配对步骤直接通过无线调试启动 Shizuku 了。","msg_to_adb_connect":"现在可以通过命令来连接：<code>adb connect ${_target}</code>","msg_apkz_launching":"即将在目标设备 ${deviceName} 打开安大师。","msg_":""};</script>
+<script>window.__I18N__ = {"title":"Shizuku 启动器","slogan":"无需安装 ADB，浏览器一键启动 Shizuku","description":"无需安装 ADB，浏览器一键启动 Shizuku","txt_download_apkz":"下载安大师","link_download_apkz":"https://apkz.app","source_code":"源代码","btn_connect":"连接设备","btn_start_shizuku":"启动 Shizuku","btn_tcpip":"激活无线调试","btn_agree":"同意","btn_disagree":"不同意","title_disclaimer":"免责声明","msg_disclaimer":"<p>连接您的设备即表示您授权此网页通过 ADB 协议与您的设备进行交互。</p><p>此网页不会修改您的系统设置或收集您的个人数据，它仅用于帮助您启动 Shizuku。<a href=\"https://github.com/APKZCOM/shizuku-starter\" target=\"_blank\">(查看源代码)</a></p>","msg_browser_not_support_webusb":"当前浏览器不支持 WebUSB，建议使用 Chrome 或 Edge 浏览器打开本页面。","msg_not_connected":"未连接","msg_connect_failed":"连接失败，请重试。","msg_connected":"已连接：${deviceName}","msg_checkif_usb_cable":"1. 请检查USB线是否已连接。","msg_checkif_usb_debugging":"2. 请检查目标设备上是否启用了开发者选项和 USB 调试。","msg_allow_debugging":"请在目标设备 ${deviceName}  点击 “确定” 以允许 USB 调试。","msg_adb_in_used":"如果有其他 ADB 程序正在连接，请先运行 <code>adb kill-server</code> 停止执行。","msg_close_android_studio":"如果打开了 Android Studio，也请先关闭它。","msg_checkif_shizuku_installed":"正在检查是否已安装 Shizuku 。。。","msg_plz_install_shizuku":"请先在 ${deviceName} 安装 Shizuku。","msg_plz_update_shizuku":"请将 Shizuku 更新至 v13.6  以上。","msg_no_shizuku_script":"未检测到 Shizuku 启动程序。","msg_shizuku_starting":"Shizuku 启动中。。。","msg_shizuku_start_failed":"Shizuku 启动失败！","msg_shizuku_start_succ":"Shizuku 启动成功！现在可以拔掉 USB 线了。","msg_wireless_debugging_activating":"正在激活无线调试。。。","msg_wireless_debugging_activated":"目标设备 ${deviceName} 已激活无线调试。<br>现在可以跳过配对步骤直接通过无线调试启动 Shizuku 了。","msg_to_adb_connect":"现在可以通过命令来连接：<code>adb connect ${_target}</code>","msg_apkz_launching":"即将在目标设备 ${deviceName} 打开安大师。","msg_":""};</script>
 <script>disclaimer.showModal();</script>
 </body>
 </html>
