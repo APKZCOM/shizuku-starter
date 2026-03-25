@@ -180,7 +180,7 @@ startBtn.onclick = async () => {
     try {
         cmd = `find ${shizuku_path} -name "${shizuku_script}" 2>/dev/null`;
         result = ((await executeCommand(cmd)) || '').trim();
-        log(result);
+        console.log(result);
         if(!result || result.indexOf(shizuku_path) !== 0 || result.substr(-shizuku_script.length) !== shizuku_script){
             log(i18n('msg_no_shizuku_script'), 'error');
             log(i18n('msg_plz_update_shizuku'));
@@ -192,9 +192,7 @@ startBtn.onclick = async () => {
 
         cmd = result;
         log(i18n('msg_shizuku_starting'));
-        //log('......');
-        //log(cmd);
-        //log('......');
+        log(cmd);
         result = await executeCommand(cmd);
 
         log(result)

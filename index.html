@@ -31,8 +31,8 @@ button { background: var(--primary); color: white; text-shadow: 1px 1px 8px #888
 button.dim { opacity: .8; filter: grayscale(1); }
 .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #94a3b8; margin-right: 0.5rem; }
 body.connected .status-dot { background: #35e149; }
-#logs { position:relative; background: #2f374a; color: #aaa; padding: 1rem; border-radius: 8px; height: 300px; overflow-y: auto; font-family: ui-monospace, monospace; font-size: 0.75rem; white-space: pre-wrap; margin-top: 1rem; transition: all .4s ease; }
-#logs:empty { opacity: 0.5;}
+#logs { position:relative; background: #2f374a; color: #aaa; padding: 1rem; border-radius: 8px; height: 300px; overflow-y: auto; font-family: ui-monospace, monospace; font-size: 0.75rem; white-space: pre-wrap; margin-top: 1rem; transition: all .2s ease; }
+#logs:empty { opacity: 0;}
 .error { color: red; }
 .warn { color: orange; }
 .succ { color: var(--primary); }
@@ -43,8 +43,9 @@ body.connected .status-dot { background: #35e149; }
 code {outline: 1px dotted currentColor; padding-inline: 4px;}
 a {color: var(--primary);}
 
-dialog { position: fixed; z-index: 999; top: 25%; transform: translateY(-50%); width: 85%; max-width: 400px; padding: 0; border-radius: 8px; border: none; outline: none; box-shadow: 0 0 1em #666; transition: all .3s ease; }
+dialog { position: fixed; z-index: 999; top: 25%; transform: translateY(-50%); width: 85%; max-width: 400px; padding: 0; border-radius: 8px; border: none; outline: none; box-shadow: 0 0 1em #666; transition: all .4s ease; }
 dialog::backdrop { background: rgba(0,0,0,.4); }
+dialog.top { top: 0px; margin-top: 0; transform: translateY(-1px); border-radius: 0 0 8px 8px; }
 @starting-style {
     dialog[open] { transform: translateY(-200%); opacity: 0; }
 }
@@ -61,6 +62,7 @@ dialog button { outline: none; }
 #ft {margin: 2em auto; padding: 1em; text-align: center; font-size: 12px; }
 .copyright { color: #999;}
 .sepa { color: #ccc; display: inline-block; margin-inline: .5rem; }
+
 </style>
 </head>
 <body>
@@ -84,7 +86,7 @@ dialog button { outline: none; }
         <a href="{{link_download_apkz}}">{{txt_download_apkz}}</a>
     </footer>
 
-    <dialog id="disclaimer" tabindex="-1">
+    <dialog id="disclaimer" class="top" tabindex="-1">
         <!--button class="x" onclick="disclaimer.close('cancel');">✕</button-->
         <header class="hd"><h2 class="title">⚠️  {{title_disclaimer}}:</h2></header>
         <div class="bd">
