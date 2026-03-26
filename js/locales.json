@@ -9,7 +9,7 @@
     },
     "description": {
         "en": "Start Shizuku via WebADB directly from your browser, no local ADB installation or drivers required.",
-        "zh_cn": "无需安装 ADB，浏览器一键启动 Shizuku"
+        "zh_cn": "无需安装 ADB 及驱动程序，也无需使用命令行，通过浏览器即可一键启动 Shizuku。"
     },
     "txt_download_apkz": {
         "en": "Download APKZ App",
