@@ -30,7 +30,12 @@ h1 { margin-top: 0; color: #1e293b; font-size: 1.25rem; border-bottom: 2px solid
 button { background: var(--primary); color: white; text-shadow: 1px 1px 8px #888; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; cursor: pointer; font-weight: 600; flex: 1; }
 button.dim { opacity: .8; filter: grayscale(1); }
 .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #94a3b8; margin-right: 0.5rem; }
-body.connected .status-dot { background: #35e149; }
+.connected .status-dot { background: #35e149; }
+
+#premise { margin: 8px auto; padding: 8px; background: #ffc; color: #f33; border-radius: 8px; }
+#premise p { margin-block: 8px; }
+.connected #premise { display: none; }
+
 #logs { position:relative; background: #2f374a; color: #aaa; padding: 1rem; border-radius: 8px; height: 300px; overflow-y: auto; font-family: ui-monospace, monospace; font-size: 0.75rem; white-space: pre-wrap; margin-top: 1rem; transition: all .2s ease; }
 #logs:empty { opacity: 0;}
 .error { color: red; }
@@ -71,6 +76,10 @@ dialog button { outline: none; }
         <h1 id="title">Shizuku Starter</h1>
         <div class="status-container">
             <span class="status-dot"></span><span id="statusText">Not connected</span>
+        </div>
+        <div id="premise">
+            <p>1. Please check if the USB cable is connected.</p>
+            <p>2. Please check if developer options and USB debugging are enabled on the target device.</p>
         </div>
         <div class="controls">
             <button id="startBtn">Start Shizuku</button>
