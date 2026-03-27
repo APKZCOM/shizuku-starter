@@ -67,6 +67,10 @@
         "en": "Connected: ${deviceName}",
         "zh_cn": "已连接：${deviceName}"
     },
+    "msg_tcpip_enabled": {
+        "en": "Wireless debugging is ready",
+        "zh_cn": " 已激活无线调试"
+    },
     "msg_checkif_usb_cable": {
         "en": "1. Please check if the USB cable is connected.",
         "zh_cn": "1. 请检查USB线是否已连接。"

@@ -75,7 +75,9 @@ async function connectDevice(_device) {
             return;
         }
 
-        deviceName = `${device.raw.manufacturerName} (${device.raw.productName})`;
+        let manufacturer = device.raw.manufacturerName || 'Unknown';
+        let productName = (device.raw.productName || 'Unknown').replace(manufacturer, '').trim();
+        deviceName = `${manufacturer} (${productName})`;
 
 	const credentialStore = new AdbWebCredentialStore();
 	console.log({credentialStore});
@@ -123,6 +125,7 @@ async function adbReady() {
 
     clearLogs();
     document.body.classList.add('connected');
+    document.body.classList.remove('tcp-ready');
     statusText.innerText = i18n('msg_connected', {deviceName});
     log(i18n('msg_connected', {deviceName}), 'succ');
 
@@ -254,8 +257,10 @@ tcpipBtn.onclick = async () => {
             if(!device){
                 log(i18n('msg_wireless_debugging_activated', {deviceName: _device}), 'succ');
                 // log(i18n('msg_to_adb_connect', {_target}), 'warn');
+                document.body.classList.add('tcp-ready');
+                statusText.innerText = i18n('msg_tcpip_enabled');
             }
-        },1000);
+        }, 1000);
         let result = await adb.tcpip.setPort(5555);;
         log(result);
         console.log({result});

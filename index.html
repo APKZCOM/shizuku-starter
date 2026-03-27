@@ -34,9 +34,10 @@ button.dim { opacity: .8; filter: grayscale(1); }
 
 #premise { margin: 8px auto; padding: 8px; background: #ffc; color: #f33; border-radius: 8px; }
 #premise p { margin-block: 8px; }
-.connected #premise { display: none; }
+.connected #premise,
+.tcp-ready #premise { display: none; }
 
-#logs { position:relative; background: #2f374a; color: #aaa; padding: 1rem; border-radius: 8px; height: 300px; overflow-y: auto; font-family: ui-monospace, monospace; font-size: 0.75rem; white-space: pre-wrap; margin-top: 1rem; transition: all .2s ease; }
+#logs { position:relative; background: #2f374a; color: #aaa; padding: 1rem; border-radius: 8px; height: 300px; overflow-y: auto; font-family: ui-monospace, monospace; font-size: 0.75rem; white-space: pre-wrap; word-wrap: break-word; margin-top: 1rem; transition: all .2s ease; }
 #logs:empty { opacity: 0;}
 .error { color: red; }
 .warn { color: orange; }
