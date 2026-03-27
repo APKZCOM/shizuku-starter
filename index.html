@@ -101,7 +101,7 @@ dialog button { outline: none; }
         <header class="hd"><h2 class="title">⚠️  {{title_disclaimer}}:</h2></header>
         <div class="bd">
             {{msg_disclaimer}}
-       </div>
+        </div>
         <footer class="ft">
             <form method="dialog">
                 <button class="btn-cancel" type="reset" value="cancel" onclick="disclaimer.close('cancel');">{{btn_disagree}}</button>
@@ -109,8 +109,36 @@ dialog button { outline: none; }
             </form>
         </footer>
     </dialog>
+
+    <dialog id="legacyBrowser" class="top">
+        <header class="hd"><h2 class="title">{{title}}</h2></header>
+        <div class="bd">
+            <p class="error">{{msg_browser_not_support_webusb}}</p>
+        </div>
+    </dialog>
+
+    <dialog id="remote" class="top">
+        <button class="x" onclick="remote.close('cancel');">✕</button>
+        <header class="hd"><h2 class="title">{{title}}</h2></header>
+        <div class="bd">
+            <p class="error">{{msg_remote}}</p>
+            <hr>
+            <p style="text-align:center;">https://shizuku-starter.apkz.app</p>
+            <p style="text-align:center">
+                <img src="https://img.apkz.com/qr?size=200&margin=2&text=https%3A%2F%2Fshizuku-starter.apkz.app%23APKZ" width=200 height=200 />
+            </p>
+        </div>
+    </dialog>
 <script id="i18n-data"></script>
-<script>disclaimer.showModal();</script>
+<script>
+if(location.hash.indexOf('device=this')>-1){
+    remote.showModal();
+}else if(!navigator.usb){
+    legacyBrowser.showModal();
+}else{
+    disclaimer.showModal();
+}
+</script>
 <script type="module" src="./js/main.js"></script>
 </body>
 </html>

@@ -135,6 +135,10 @@
         "en": "APKZ app will open on ${deviceName}.",
         "zh_cn": "即将在目标设备 ${deviceName} 打开安大师。"
     },
+    "msg_remote": {
+        "en": "To start Shizuku on this device, please open this page from your PC or another phone.",
+        "zh_cn": "如果你要启动这个设备上的 Shizuku，请从电脑或另一台手机上打开本页面。"
+    },
     "msg_": {
         "en": "",
         "zh_cn": ""
