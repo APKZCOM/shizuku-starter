@@ -4,12 +4,12 @@
         "zh_cn": "Shizuku 启动器"
     },
     "slogan": {
-        "en": "Start Shizuku via WebADB directly from your browser",
-        "zh_cn": "无需安装 ADB，浏览器一键启动 Shizuku"
+        "en": "Start Shizuku (or Stellar) via WebADB directly from your browser",
+        "zh_cn": "无需安装 ADB，浏览器一键启动 Shizuku (或 Stellar)"
     },
     "description": {
-        "en": "Start Shizuku via WebADB directly from your browser, no local ADB installation or drivers required.",
-        "zh_cn": "无需安装 ADB 及驱动程序，也无需使用命令行，通过浏览器即可一键启动 Shizuku。"
+        "en": "Start Shizuku (or Stellar) via WebADB directly from your browser, no local ADB installation or drivers required.",
+        "zh_cn": "无需安装 ADB 及驱动程序，也无需使用命令行，通过浏览器即可一键启动 Shizuku (或 Stellar)。"
     },
     "txt_download_apkz": {
         "en": "Download APKZ App",
@@ -31,6 +31,10 @@
         "en": "Start Shizuku",
         "zh_cn": "启动 Shizuku"
     },
+    "btn_start_stellar": {
+        "en": "Start Stellar",
+        "zh_cn": "启动 Stellar"
+    },
     "btn_tcpip": {
         "en": "Activate wireless debugging",
         "zh_cn": "激活无线调试"
@@ -48,8 +52,8 @@
         "zh_cn": "免责声明"
     },
     "msg_disclaimer": {
-        "en": "<p>By connecting your device, you authorize this webpage to interact with your device via the ADB protocol. </p><p>This webpage will not modify your system settings or collect your private data, it is solely for helping you start Shizuku. <a href=\"https://github.com/APKZCOM/shizuku-starter\" target=\"_blank\">(Source Code)</a></p>",
-        "zh_cn": "<p>连接您的设备即表示您授权此网页通过 ADB 协议与您的设备进行交互。</p><p>此网页不会修改您的系统设置或收集您的个人数据，它仅用于帮助您启动 Shizuku。<a href=\"https://github.com/APKZCOM/shizuku-starter\" target=\"_blank\">(查看源代码)</a></p>"
+        "en": "<p>By connecting your device, you authorize this webpage to interact with your device via the ADB protocol. </p><p>This webpage will not modify your system settings or collect your private data, it is solely for helping you start Shizuku (or Stellar). <a href=\"https://github.com/APKZCOM/shizuku-starter\" target=\"_blank\">(Source Code)</a></p>",
+        "zh_cn": "<p>连接您的设备即表示您授权此网页通过 ADB 协议与您的设备进行交互。</p><p>此网页不会修改您的系统设置或收集您的个人数据，它仅用于帮助您启动 Shizuku (或 Stellar)。<a href=\"https://github.com/APKZCOM/shizuku-starter\" target=\"_blank\">(查看源代码)</a></p>"
     },
     "msg_browser_not_support_webusb": {
         "en": "Your current browser does not support WebUSB. Please open this page in Chrome or Edge browser.",
@@ -92,40 +96,40 @@
         "zh_cn": "如果打开了 Android Studio，也请先关闭它。"
     },
     "msg_checkif_shizuku_installed": {
-        "en": "Checking if Shizuku is installed...",
-        "zh_cn": "正在检查是否已安装 Shizuku 。。。"
+        "en": "Checking if ${name} is installed...",
+        "zh_cn": "正在检查是否已安装 ${name} 。。。"
     },
     "msg_plz_install_shizuku": {
-        "en": "Please install Shizuku on ${deviceName} first.",
-        "zh_cn": "请先在 ${deviceName} 安装 Shizuku。"
+        "en": "Please install ${name} on ${deviceName} first.",
+        "zh_cn": "请先在 ${deviceName} 安装 ${name}。"
     },
     "msg_plz_update_shizuku": {
-        "en": "Please update Shizuku to v13.6 or later.",
-        "zh_cn": "请将 Shizuku 更新至 v13.6  以上。"
+        "en": "Please update ${name} to ${version} or later.",
+        "zh_cn": "请将 ${name} 更新至 ${version}  以上。"
     },
     "msg_no_shizuku_script": {
         "en": "Oops! Startup script not found.",
-        "zh_cn": "未检测到 Shizuku 启动程序。"
+        "zh_cn": "未检测到 ${name} 启动程序。"
     },
     "msg_shizuku_starting": {
-        "en": "Shizuku is starting up...",
-        "zh_cn": "Shizuku 启动中。。。"
+        "en": "${name} is starting up...",
+        "zh_cn": "${name} 启动中。。。"
     },
     "msg_shizuku_start_failed": {
-        "en": "Shizuku failed to start.",
-        "zh_cn": "Shizuku 启动失败！"
+        "en": "${name} failed to start.",
+        "zh_cn": "${name} 启动失败！"
     },
     "msg_shizuku_start_succ": {
-        "en": "Shizuku started successfully. You can unplug the USB cable now.",
-        "zh_cn": "Shizuku 启动成功！现在可以拔掉 USB 线了。"
+        "en": "${name} started successfully. You can unplug the USB cable now.",
+        "zh_cn": "${name} 启动成功！现在可以拔掉 USB 线了。"
     },
     "msg_wireless_debugging_activating": {
         "en": "Activating wireless debugging...",
         "zh_cn": "正在激活无线调试。。。"
     },
     "msg_wireless_debugging_activated": {
-        "en": "Wireless debugging on this target device ${deviceName} is activated.<br>Now, you can start Shizuku via wireless debugging without pairing.",
-        "zh_cn": "目标设备 ${deviceName} 已激活无线调试。<br>现在可以跳过配对步骤直接通过无线调试启动 Shizuku 了。"
+        "en": "Wireless debugging on this target device ${deviceName} is activated.<br>Now, you can start Shizuku (or Stellar) via wireless debugging without pairing.",
+        "zh_cn": "目标设备 ${deviceName} 已激活无线调试。<br>现在可以跳过配对步骤直接通过无线调试启动 Shizuku (或 Stellar) 了。"
     },
     "msg_to_adb_connect": {
         "en": "To connect, run <code>adb connect ${_target}</code>",
@@ -136,8 +140,8 @@
         "zh_cn": "即将在目标设备 ${deviceName} 打开安大师。"
     },
     "msg_remote": {
-        "en": "To start Shizuku on this device, please open this page from your PC or another phone.",
-        "zh_cn": "如果你要启动这个设备上的 Shizuku，请从电脑或另一台手机上打开本页面。"
+        "en": "To start Shizuku (or Stellar) on this device, please open this page from your PC or another phone.",
+        "zh_cn": "如果你要启动这个设备上的 Shizuku (或 Stellar)，请从电脑或另一台手机上打开本页面。"
     },
     "msg_": {
         "en": "",

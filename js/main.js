@@ -2,9 +2,6 @@ import { AdbDaemonWebUsbDeviceManager } from "@yume-chan/adb-daemon-webusb";
 import AdbWebCredentialStore from "@yume-chan/adb-credential-web";
 import { Adb, AdbDaemonTransport } from "@yume-chan/adb";
 
-const shizuku_package_name = 'moe.shizuku.privileged.api';
-const shizuku_script  = 'libshizuku.so';
-const shizuku_download_url = 'https://app.apkz.com/app/'+shizuku_package_name+'/download';
 const apkz_package_name = 'io.xapk.installer';
 let AGREED = false;
 let device;
@@ -133,8 +130,10 @@ async function adbReady() {
     if(readyFor) return;
     if(location.hash.indexOf('btn=tcpip') > -1){
         tcpipBtn.click();
+    }else if(location.hash.indexOf('btn=stellar') > -1){
+        stellarBtn.click();
     }else{
-        startBtn.click();
+        shizukuBtn.click();
     }
 }
 
@@ -148,8 +147,13 @@ function disconnected() {
     statusText.innerText = i18n('msg_not_connected');
 }
 
-startBtn.onclick = async () => {
-    readyFor = 'shizuku';
+async function startShizuku(opts) {
+    readyFor = opts.key || 'shizuku';
+    let name = opts.name || 'Shizuku';
+    let pkg = opts.pkg;
+    let version = opts.version;
+    let so_file = opts.so;
+    let url = opts.url;
     if(!document.body.classList.contains('connected')){
         if(!AGREED) {
             disclaimer.showModal();
@@ -162,8 +166,8 @@ startBtn.onclick = async () => {
     
     let cmd, result;
     try {
-	cmd = `pm path ${shizuku_package_name}`;
-        log(i18n('msg_checkif_shizuku_installed'));
+	cmd = `pm path ${pkg}`;
+        log(i18n('msg_checkif_shizuku_installed', {name}));
         result = await executeCommand(cmd);
 
     } catch (err) {
@@ -173,28 +177,28 @@ startBtn.onclick = async () => {
     let [, shizuku_path] = result.match(/package:(.+)\/base.apk/) || [];
     if(!shizuku_path){
         log(`Oops! ${result}`, 'error');
-        log(i18n('msg_plz_install_shizuku', {deviceName}), 'warn');
+        log(i18n('msg_plz_install_shizuku', {deviceName, name}), 'warn');
 
-	cmd = `am start -a android.intent.action.VIEW -d "${shizuku_download_url}"`;
+	cmd = `am start -a android.intent.action.VIEW -d "${url}"`;
         await executeCommand(cmd);
         return;
     }
 
     try {
-        cmd = `find ${shizuku_path} -name "${shizuku_script}" 2>/dev/null`;
+        cmd = `find ${shizuku_path} -name "${so_file}" 2>/dev/null`;
         result = ((await executeCommand(cmd)) || '').trim();
         console.log(result);
-        if(!result || result.indexOf(shizuku_path) !== 0 || result.substr(-shizuku_script.length) !== shizuku_script){
-            log(i18n('msg_no_shizuku_script'), 'error');
-            log(i18n('msg_plz_update_shizuku'));
+        if(!result || result.indexOf(shizuku_path) !== 0 || result.substr(-so_file.length) !== so_file){
+            log(i18n('msg_no_shizuku_script', {name}), 'error');
+            log(i18n('msg_plz_update_shizuku', {name, version}));
 
-	    cmd = `am start -a android.intent.action.VIEW -d "${shizuku_download_url}"`;
+	    cmd = `am start -a android.intent.action.VIEW -d "${url}"`;
             await executeCommand(cmd);
             return;
         }
 
         cmd = result;
-        log(i18n('msg_shizuku_starting'));
+        log(i18n('msg_shizuku_starting', {name}));
         log(cmd);
         result = await executeCommand(cmd);
 
@@ -203,15 +207,25 @@ startBtn.onclick = async () => {
         log(`Error: ${err.message}`, 'error');
     }
 
-    if(!result.match(/shizuku_server pid is \d+/)){
+    let re = /shizuku_server pid is \d+/;
+    if(name === 'Stellar') re = /stellar_server ([^\n\r]+) \d+/;
+    if(!result.match(re)){
         log(`Oops! ${result}`, 'error');
-        log(i18n('msg_shizuku_start_failed'), 'error');
+        log(i18n('msg_shizuku_start_failed', {name}), 'error');
         return;
     }
 	
-    log(i18n('msg_shizuku_start_succ'), 'succ');
+    log(i18n('msg_shizuku_start_succ', {name}), 'succ');
 
     if(location.hash.indexOf('APKZ') > -1) openAPKZ();
+}
+
+shizukuBtn.onclick = async function (){
+    await startShizuku(this.dataset);
+}
+
+stellarBtn.onclick = async function (){
+    await startShizuku(this.dataset);
 }
 
 function openAPKZ() {
