@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<title>Shizuku Starter - Start Shizuku via WebADB directly from your browser</title>
-<meta name="description" content="Start Shizuku via WebADB directly from your browser, no local ADB installation or drivers required.">
+<title>Shizuku Starter - Start Shizuku (or Stellar) via WebADB directly from your browser</title>
+<meta name="description" content="Start Shizuku (or Stellar) via WebADB directly from your browser, no local ADB installation or drivers required.">
 <script>
 if(navigator.language.indexOf('zh') === 0 && location.pathname === '/'){
     let url = './zh_cn.html';
@@ -70,7 +70,7 @@ dialog button { outline: none; }
 .sepa { color: #ccc; display: inline-block; margin-inline: .5rem; }
 
 </style>
-  <script type="module" crossorigin src="/assets/main-Di_P3snv.js"></script>
+  <script type="module" crossorigin src="/assets/main-DozpMRJz.js"></script>
 </head>
 <body>
     <main class="card" id="mainCard">
@@ -83,7 +83,8 @@ dialog button { outline: none; }
             <p>2. Please check if developer options and USB debugging are enabled on the target device.</p>
         </div>
         <div class="controls">
-            <button id="startBtn">Start Shizuku</button>
+            <button id="shizukuBtn" data-key="shizuku" data-name="Shizuku" data-pkg="moe.shizuku.privileged.api" data-version="v13.6" data-so="libshizuku.so" data-url="https://app.apkz.com/app/moe.shizuku.privileged.api">Start Shizuku</button>
+            <button id="stellarBtn" data-key="stellar" data-name="Stellar" data-pkg="roro.stellar.manager" data-version="v1.0.16" data-so="libstellar.so" data-url="https://app.apkz.com/app/roro.stellar.manager">Start Stellar</button>
             <button id="tcpipBtn" class="dim">Activate wireless debugging</button>
         </div>
         <div id="logs"></div>
@@ -101,7 +102,7 @@ dialog button { outline: none; }
         <!--button class="x" onclick="disclaimer.close('cancel');">✕</button-->
         <header class="hd"><h2 class="title">⚠️  Disclaimer:</h2></header>
         <div class="bd">
-            <p>By connecting your device, you authorize this webpage to interact with your device via the ADB protocol. </p><p>This webpage will not modify your system settings or collect your private data, it is solely for helping you start Shizuku. <a href="https://github.com/APKZCOM/shizuku-starter" target="_blank">(Source Code)</a></p>
+            <p>By connecting your device, you authorize this webpage to interact with your device via the ADB protocol. </p><p>This webpage will not modify your system settings or collect your private data, it is solely for helping you start Shizuku (or Stellar). <a href="https://github.com/APKZCOM/shizuku-starter" target="_blank">(Source Code)</a></p>
         </div>
         <footer class="ft">
             <form method="dialog">
@@ -122,7 +123,7 @@ dialog button { outline: none; }
         <button class="x" onclick="remote.close('cancel');">✕</button>
         <header class="hd"><h2 class="title">Shizuku Starter</h2></header>
         <div class="bd">
-            <p class="error">To start Shizuku on this device, please open this page from your PC or another phone.</p>
+            <p class="error">To start Shizuku (or Stellar) on this device, please open this page from your PC or another phone.</p>
             <hr>
             <p style="text-align:center;">https://shizuku-starter.apkz.app</p>
             <p style="text-align:center">
@@ -130,7 +131,7 @@ dialog button { outline: none; }
             </p>
         </div>
     </dialog>
-<script>window.__I18N__ = {"title":"Shizuku Starter","slogan":"Start Shizuku via WebADB directly from your browser","description":"Start Shizuku via WebADB directly from your browser, no local ADB installation or drivers required.","txt_download_apkz":"Download APKZ App","link_download_apkz":"https://apkz.app","source_code":"Source Code","btn_connect":"Connect to device","btn_start_shizuku":"Start Shizuku","btn_tcpip":"Activate wireless debugging","btn_agree":"Agree","btn_disagree":"Disagree","title_disclaimer":"Disclaimer","msg_disclaimer":"<p>By connecting your device, you authorize this webpage to interact with your device via the ADB protocol. </p><p>This webpage will not modify your system settings or collect your private data, it is solely for helping you start Shizuku. <a href=\"https://github.com/APKZCOM/shizuku-starter\" target=\"_blank\">(Source Code)</a></p>","msg_browser_not_support_webusb":"Your current browser does not support WebUSB. Please open this page in Chrome or Edge browser.","msg_not_connected":"Not connected","msg_connect_failed":"Connection failed, please try again.","msg_connected":"Connected: ${deviceName}","msg_tcpip_enabled":"Wireless debugging is ready","msg_checkif_usb_cable":"1. Please check if the USB cable is connected.","msg_checkif_usb_debugging":"2. Please check if developer options and USB debugging are enabled on the target device.","msg_allow_debugging":"Please tap \"OK\" on ${deviceName} to allow debugging.","msg_adb_in_used":"If other adb programs are already running, please execute <code>adb kill-server</code> to stop them first.","msg_close_android_studio":"If Android Studio is open, please close it first.","msg_checkif_shizuku_installed":"Checking if Shizuku is installed...","msg_plz_install_shizuku":"Please install Shizuku on ${deviceName} first.","msg_plz_update_shizuku":"Please update Shizuku to v13.6 or later.","msg_no_shizuku_script":"Oops! Startup script not found.","msg_shizuku_starting":"Shizuku is starting up...","msg_shizuku_start_failed":"Shizuku failed to start.","msg_shizuku_start_succ":"Shizuku started successfully. You can unplug the USB cable now.","msg_wireless_debugging_activating":"Activating wireless debugging...","msg_wireless_debugging_activated":"Wireless debugging on this target device ${deviceName} is activated.<br>Now, you can start Shizuku via wireless debugging without pairing.","msg_to_adb_connect":"To connect, run <code>adb connect ${_target}</code>","msg_apkz_launching":"APKZ app will open on ${deviceName}.","msg_remote":"To start Shizuku on this device, please open this page from your PC or another phone.","msg_":""};</script>
+<script>window.__I18N__ = {"title":"Shizuku Starter","slogan":"Start Shizuku (or Stellar) via WebADB directly from your browser","description":"Start Shizuku (or Stellar) via WebADB directly from your browser, no local ADB installation or drivers required.","txt_download_apkz":"Download APKZ App","link_download_apkz":"https://apkz.app","source_code":"Source Code","btn_connect":"Connect to device","btn_start_shizuku":"Start Shizuku","btn_start_stellar":"Start Stellar","btn_tcpip":"Activate wireless debugging","btn_agree":"Agree","btn_disagree":"Disagree","title_disclaimer":"Disclaimer","msg_disclaimer":"<p>By connecting your device, you authorize this webpage to interact with your device via the ADB protocol. </p><p>This webpage will not modify your system settings or collect your private data, it is solely for helping you start Shizuku (or Stellar). <a href=\"https://github.com/APKZCOM/shizuku-starter\" target=\"_blank\">(Source Code)</a></p>","msg_browser_not_support_webusb":"Your current browser does not support WebUSB. Please open this page in Chrome or Edge browser.","msg_not_connected":"Not connected","msg_connect_failed":"Connection failed, please try again.","msg_connected":"Connected: ${deviceName}","msg_tcpip_enabled":"Wireless debugging is ready","msg_checkif_usb_cable":"1. Please check if the USB cable is connected.","msg_checkif_usb_debugging":"2. Please check if developer options and USB debugging are enabled on the target device.","msg_allow_debugging":"Please tap \"OK\" on ${deviceName} to allow debugging.","msg_adb_in_used":"If other adb programs are already running, please execute <code>adb kill-server</code> to stop them first.","msg_close_android_studio":"If Android Studio is open, please close it first.","msg_checkif_shizuku_installed":"Checking if ${name} is installed...","msg_plz_install_shizuku":"Please install ${name} on ${deviceName} first.","msg_plz_update_shizuku":"Please update ${name} to ${version} or later.","msg_no_shizuku_script":"Oops! Startup script not found.","msg_shizuku_starting":"${name} is starting up...","msg_shizuku_start_failed":"${name} failed to start.","msg_shizuku_start_succ":"${name} started successfully. You can unplug the USB cable now.","msg_wireless_debugging_activating":"Activating wireless debugging...","msg_wireless_debugging_activated":"Wireless debugging on this target device ${deviceName} is activated.<br>Now, you can start Shizuku (or Stellar) via wireless debugging without pairing.","msg_to_adb_connect":"To connect, run <code>adb connect ${_target}</code>","msg_apkz_launching":"APKZ app will open on ${deviceName}.","msg_remote":"To start Shizuku (or Stellar) on this device, please open this page from your PC or another phone.","msg_":""};</script>
 <script>
 if(location.hash.indexOf('device=this')>-1){
     remote.showModal();
